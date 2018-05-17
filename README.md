@@ -1,3 +1,5 @@
+OpenCLI
+=========
 Generate a command line interface based on OpenAPI Specification.
 
 From the OpenAPI Specification project:
