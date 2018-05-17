@@ -18,7 +18,12 @@ class CommandCompleter(Completer):
 
     def _text_to_completions(self, text):
         """Convert raw text into completion suggestions."""
-        operation, text = self._extract_operation(words=shlex.split(text))
+        try:
+            words = shlex.split(text)
+        except ValueError:
+            words = text.split(" ")
+
+        operation, text = self._extract_operation(words=words)
 
         if callable(operation):
             return self._get_operation_params_completions(operation=operation, text=text)
