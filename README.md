@@ -11,7 +11,7 @@ Installation
 ------------
 To install OpenCLI, simply:
 
-    pip install open-cli
+    pip install git+https://github.com/sharbov/open-cli
 
 Usage
 -----
