@@ -29,4 +29,4 @@ For more options run:
 
 Credits
 -------
-This project relies on Yelps [bravado](https://github.com/Yelp/bravado) project & on Jonathan Slenders. [python-prompt-toolkit](https://github.com/jonathanslenders/python-prompt-toolkit)
+This project relies on Yelps [bravado](https://github.com/Yelp/bravado) project & on Jonathan Slenders [python-prompt-toolkit](https://github.com/jonathanslenders/python-prompt-toolkit).
