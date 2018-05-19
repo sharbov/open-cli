@@ -51,7 +51,7 @@ class OpenCLI:
 
             try:
                 input_text = prompt(
-                    f"{self.name} $ ",
+                    self.name + " $ ",
                     history=history,
                     completer=command_completer,
                     auto_suggest=AutoSuggestFromHistory(),
@@ -62,10 +62,7 @@ class OpenCLI:
                 exit("User Exited")
 
             except Exception as exc:
-                # self.logger.exception(exc)
                 self.logger.error(exc)
-                # print operation.__doc__
-                # raise
 
     def execute(self, command):
         """Parse and execute the given command."""
