@@ -6,12 +6,17 @@ From the OpenAPI Specification project:
 
 > The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection.
 
+Demo
+----
+
+![Alt Text](https://github.com/sharbov/open-cli/blob/master/demo.gif)
 
 Installation
 ------------
 To install OpenCLI, simply:
 
     pip install opencli
+
 Usage
 -----
 
