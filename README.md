@@ -1,6 +1,6 @@
 OpenCLI
 =========
-Generate a command line interface based on OpenAPI Specification.
+A CLI for every service which exposes a OpenAPI (Swagger) specification endpoint.
 
 From the OpenAPI Specification project:
 
