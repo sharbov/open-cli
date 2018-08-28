@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Open-CLI."""
+import os
 import logging
 import warnings
 
@@ -9,9 +10,9 @@ from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 
-from open_cli import parser
-from open_cli import completer
-from open_cli import formatter
+import parser
+import completer
+import formatter
 
 # Suppress bravado warnings
 warnings.filterwarnings("ignore")
@@ -20,15 +21,23 @@ warnings.filterwarnings("ignore")
 class OpenCLI:
     """CLI processor."""
 
-    def __init__(self, source, history_path="history.txt", output_format="raw"):
+    def __init__(self, source, history_path, output_format="raw", headers=None):
         """Initialize the CLI processor."""
         self.history_path = history_path
         self.output_format = output_format
 
         self.logger = logging.getLogger("open-cli")
-        self.logger.debug("Creating a python client based on %s", source)
+        self.logger.debug("Creating a python client based on %s, headers: %s", source, headers)
+
+        headers = self._parse_headers(headers)
+
+        # Handle non-url sources
+        if os.path.exists(source):
+            source = "file://" + source
+
         self.client = SwaggerClient.from_url(
             source,
+            request_headers=headers,
             config={
                 'use_models': False,
                 'validate_responses': False,
@@ -51,7 +60,7 @@ class OpenCLI:
 
             try:
                 input_text = prompt(
-                    self.name + " $ ",
+                    u"%s $ " % self.name,
                     history=history,
                     completer=command_completer,
                     auto_suggest=AutoSuggestFromHistory(),
@@ -74,6 +83,14 @@ class OpenCLI:
 
         self.logger.debug("Formatting response %s", response)
         print(formatter.format_response(response, output_format=self.output_format))
+
+    @staticmethod
+    def _parse_headers(headers):
+        """Parse headers list into a dictionary."""
+        try:
+            return dict(header.split(":") for header in headers)
+        except:
+            raise ValueError("Invalid headers %s" % headers)
 
 
 if __name__ == '__main__':
