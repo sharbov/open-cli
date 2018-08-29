@@ -1,10 +1,8 @@
+import json
 import tabulate
 
-from pprint import pformat
-
-
-def format_response(response, output_format):
-    return u"\n{}\n".format(to_table(response) if output_format == "table" else pformat(response))
+JSON = "json"
+TABLE = "table"
 
 
 def to_table(response):
@@ -27,3 +25,18 @@ def to_table(response):
             headers={key: key.capitalize() for key in response[0].keys()},
             tablefmt='grid'
         )
+
+
+def to_json(response):
+    """Convert raw response into json output."""
+    return json.dumps(response, indent=2)
+
+
+FORMATTERS = {
+    JSON: to_json,
+    TABLE: to_table,
+}
+
+
+def format_response(response, output_format):
+    return u"\n{}\n".format(FORMATTERS[output_format](response))

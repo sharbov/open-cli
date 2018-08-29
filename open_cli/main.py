@@ -3,6 +3,7 @@ import logging
 import argparse
 
 import cli
+import formatter
 
 HISTORY_PATH = os.path.join(os.path.expanduser("~"), ".open-cli")
 
@@ -14,7 +15,8 @@ def main():
     args_parser.add_argument('-v', '--verbose', action='store_true', help='If set, set log level to debug')
     args_parser.add_argument('-t', '--history', type=str, default=HISTORY_PATH, help='history file path')
     args_parser.add_argument('-c', '--command', type=str, help='command to execute', required=False)
-    args_parser.add_argument('-f', '--format', type=str, choices=['raw', 'table'], default='raw',
+    args_parser.add_argument('-f', '--format', type=str,
+                             choices=formatter.FORMATTERS.keys(), default=formatter.JSON,
                              help='Set the CLI output format')
     args_parser.add_argument('--header', nargs='+', default=[],
                              help='requests headers, usage: --header x-header-1:val-1 x-header-2:val2')
