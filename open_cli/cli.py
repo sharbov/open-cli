@@ -10,6 +10,7 @@ from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 
+import help
 import parser
 import completer
 import formatter
@@ -77,6 +78,10 @@ class OpenCLI:
         """Parse and execute the given command."""
         self.logger.debug("Parsing the input text %s", command)
         operation, arguments = self.command_parser.parse(text=command)
+
+        if help.is_requested(arguments):
+            self.logger.debug("Help requested for operation %s", operation)
+            return help.show(operation)
 
         self.logger.debug("Invoke operation %s with arguments %s", operation, arguments)
         response = operation(**arguments).result()

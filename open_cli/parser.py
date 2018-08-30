@@ -20,7 +20,7 @@ class CommandParser:
 
         # Separate elements into attributes and arguments
         for element in elements:
-            if element.startswith('--'):
+            if element.startswith('-'):
                 raw_arguments.append(element)
             else:
                 attributes.append(element)
@@ -47,7 +47,13 @@ class CommandParser:
         arguments = {}
 
         for raw_argument in raw_arguments:
-            full_path, value = raw_argument.lstrip("-").split("=")
+            striped_argument = raw_argument.lstrip("-")
+
+            if "=" in striped_argument:
+                full_path, value = striped_argument.split("=")
+            else:
+                full_path, value = striped_argument, "True"
+
             self.set_nested(arguments, value, *full_path.split('.'))
 
         return arguments
