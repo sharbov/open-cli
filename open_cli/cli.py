@@ -22,7 +22,7 @@ warnings.filterwarnings("ignore")
 class OpenCLI:
     """CLI processor."""
 
-    def __init__(self, source, history_path, output_format="raw", headers=None):
+    def __init__(self, source, history_path, output_format=formatter.JSON, headers=None):
         """Initialize the CLI processor."""
         self.history_path = history_path
         self.output_format = output_format
