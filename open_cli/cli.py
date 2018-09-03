@@ -10,10 +10,10 @@ from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 
-import help
-import parser
-import completer
-import formatter
+from . import help
+from . import parser
+from . import completer
+from . import formatter
 
 # Suppress bravado warnings
 warnings.filterwarnings("ignore")

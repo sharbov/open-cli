@@ -2,8 +2,8 @@ import os
 import logging
 import argparse
 
-import cli
-import formatter
+from . import cli
+from . import formatter
 
 HISTORY_PATH = os.path.join(os.path.expanduser("~"), ".open-cli")
 
