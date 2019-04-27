@@ -73,7 +73,6 @@ class OpenCLI:
 
             except Exception as exc:
                 self.logger.error(exc)
-                print(exc)
 
     def execute(self, command):
         """Parse and execute the given command."""
